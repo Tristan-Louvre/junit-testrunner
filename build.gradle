@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'io.louvre'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven { url "http://smartbearsoftware.com/repository/maven2" }
+}
+
+ext {
+	readyApiVersion = '2.2.0'
+}
+
+dependencies {
+	compile group: 'org.codehaus.gmaven.runtime', name: 'gmaven-runtime-1.8', version:'1.5'
+	compile "com.smartbear:ready-api-runners:${readyApiVersion}"
+/*	compile "com.smartbear:ready-api-core:${readyApiVersion}"
+	compile "com.smartbear:ready-api-soapui-pro:${readyApiVersion}"
+	compile "com.smartbear:ready-api-projects:${readyApiVersion}"
+	compile 'org.projectlombok:lombok'
+	compile 'org.springframework.boot:spring-boot-starter-templater'
+	compile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'*/
+}
+
+
