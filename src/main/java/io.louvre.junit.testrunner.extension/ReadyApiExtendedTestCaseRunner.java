@@ -4,25 +4,23 @@ import com.eviware.soapui.analytics.Analytics;
 import com.eviware.soapui.analytics.ReadyApiActions;
 import com.smartbear.ready.cmd.RunnerProductInfo;
 import com.smartbear.ready.cmd.runner.pro.SoapUIProTestCaseRunner;
+import com.smartbear.ready.core.ReadyApiCoreModule;
+
 
 public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
-    public static void main (String [] var0) throws Exception {
-        RunnerProductInfo.setRunnerName("TestCaseRunner");
-        Analytics.trackAction(ReadyApiActions.START_COMMAND_LINE_RUNNER, new String[]{"Type", "SoapUIProTestCaseRunner"});
-        ReadyApiExtendedTestCaseRunner testCaseRunner = new ReadyApiExtendedTestCaseRunner();
-        int result = testCaseRunner.init(var0);
-        System.exit(result);
+
+    private ReadyApiExtendedTestCaseRunner() {
+        super();
     }
 
-    public ReadyApiExtendedTestCaseRunner() {
-        super();
+    public static void main (String [] var0) throws Exception {
+        RunnerProductInfo.setRunnerName("TestCaseRunner");
+        Analytics.trackAction(ReadyApiActions.START_COMMAND_LINE_RUNNER, "Type", "SoapUIProTestCaseRunner");
+        System.exit((new ReadyApiExtendedTestCaseRunner()).init(var0));
     }
 
     @Override
     protected SoapUIOptions initCommandLineOptions() {
-        //SoapUIOptions var1 = super.initCommandLineOptions();
-        //var1.addOption("Z", false, "ITS A FUCKEN Z BRAH");
-        //return var1;
         SoapUIOptions options = new SoapUIOptions("testrunner");
         options.addOption("c", true, "Sets the testcase");
         options.addOption("E", true, "Sets the environment");
@@ -35,4 +33,19 @@ public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
         options.addOption("s", true, "Sets the testsuite");
         return options;
     }
+
+/*    @Override
+    public void printReport(long var1) {
+        this.outputHandler.outputLine("");
+        this.outputHandler.outputLine(ReadyApiCoreModule.READY_API_NAME + " " + ReadyApiCoreModule.READY_API_VERSION + " TestCaseRunner Summary");
+        this.outputHandler.outputLine("-----------------------------");
+        this.outputHandler.outputLine("Time Taken: " + var1 + "ms");
+        this.outputHandler.outputLine("Total TestSuites: " + this.i);
+        this.outputHandler.outputLine("Total TestCases: " + this.j + " (" + this.h.size() + " failed)");
+        this.outputHandler.outputLine("Total TestSteps: " + this.k);
+        this.outputHandler.outputLine("Total Request Assertions: " + this.l);
+        this.outputHandler.outputLine("Total Failed Assertions: " + this.e.size());
+        this.outputHandler.outputLine("Total Exported Results: " + this.s);
+        this.outputHandler.outputLine("--------------THIS WAS ADDED BY ME---------------");
+    }*/
 }
