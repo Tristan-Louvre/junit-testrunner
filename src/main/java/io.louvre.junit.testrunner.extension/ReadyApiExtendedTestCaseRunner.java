@@ -2,15 +2,20 @@ package io.louvre.junit.testrunner.extension;
 
 import com.eviware.soapui.analytics.Analytics;
 import com.eviware.soapui.analytics.ReadyApiActions;
+import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import com.smartbear.ready.cmd.RunnerProductInfo;
 import com.smartbear.ready.cmd.runner.pro.SoapUIProTestCaseRunner;
-import com.smartbear.ready.core.ReadyApiCoreModule;
+import io.louvre.junit.testrunner.extension.factory.JUnitReportCollectorFactory;
 
 
 public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
 
-    private ReadyApiExtendedTestCaseRunner() {
+    public ReadyApiExtendedTestCaseRunner() {
         super();
+    }
+
+    public ReadyApiExtendedTestCaseRunner(String title) {
+        super(title);
     }
 
     public static void main (String [] var0) throws Exception {
@@ -34,18 +39,8 @@ public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
         return options;
     }
 
-/*    @Override
-    public void printReport(long var1) {
-        this.outputHandler.outputLine("");
-        this.outputHandler.outputLine(ReadyApiCoreModule.READY_API_NAME + " " + ReadyApiCoreModule.READY_API_VERSION + " TestCaseRunner Summary");
-        this.outputHandler.outputLine("-----------------------------");
-        this.outputHandler.outputLine("Time Taken: " + var1 + "ms");
-        this.outputHandler.outputLine("Total TestSuites: " + this.i);
-        this.outputHandler.outputLine("Total TestCases: " + this.j + " (" + this.h.size() + " failed)");
-        this.outputHandler.outputLine("Total TestSteps: " + this.k);
-        this.outputHandler.outputLine("Total Request Assertions: " + this.l);
-        this.outputHandler.outputLine("Total Failed Assertions: " + this.e.size());
-        this.outputHandler.outputLine("Total Exported Results: " + this.s);
-        this.outputHandler.outputLine("--------------THIS WAS ADDED BY ME---------------");
-    }*/
+    @Override
+    protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
+        return JUnitReportCollectorFactory.newJUnitReportCollector();
+    }
 }
