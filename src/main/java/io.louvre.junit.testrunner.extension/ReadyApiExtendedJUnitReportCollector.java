@@ -23,6 +23,7 @@ public class ReadyApiExtendedJUnitReportCollector extends JUnitSecurityReportCol
         TestCase testCase = testRunner.getTestCase();
         TestSuite testSuite = testCase.getTestSuite();
         reports = this.getReports();
+
         if (!reports.containsKey(testSuite.getName())) {
             JUnitReport report = new JUnitReport();
             report.setIncludeTestProperties(this.includeTestPropertiesInReport);
