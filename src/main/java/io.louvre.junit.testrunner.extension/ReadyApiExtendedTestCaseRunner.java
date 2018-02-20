@@ -5,17 +5,12 @@ import com.eviware.soapui.analytics.ReadyApiActions;
 import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import com.smartbear.ready.cmd.RunnerProductInfo;
 import com.smartbear.ready.cmd.runner.pro.SoapUIProTestCaseRunner;
-import io.louvre.junit.testrunner.extension.factory.JUnitReportCollectorFactory;
 
 
 public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
 
     public ReadyApiExtendedTestCaseRunner() {
         super();
-    }
-
-    public ReadyApiExtendedTestCaseRunner(String title) {
-        super(title);
     }
 
     public static void main (String [] var0) throws Exception {
@@ -41,6 +36,6 @@ public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
 
     @Override
     protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
-        return JUnitReportCollectorFactory.newJUnitReportCollector();
+        return new ReadyApiExtendedJUnitReportCollector();
     }
 }

@@ -15,7 +15,6 @@ public class ReadyApiExtendedJUnitReportCollector extends JUnitSecurityReportCol
         super();
     }
 
-
     @Override
     public void beforeRun(TestCaseRunner testRunner, TestCaseRunContext runContext) {
         HashMap<String, JUnitReport> reports;
@@ -25,7 +24,7 @@ public class ReadyApiExtendedJUnitReportCollector extends JUnitSecurityReportCol
         reports = this.getReports();
 
         if (!reports.containsKey(testSuite.getName())) {
-            JUnitReport report = new JUnitReport();
+            JUnitReport report = new ReadyApiExtendedJUnitReport();
             report.setIncludeTestProperties(this.includeTestPropertiesInReport);
             report.setTestSuiteName(testSuite.getProject().getName() + " - " + testSuite.getName());
             reports.put(testSuite.getName(), report);
