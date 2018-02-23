@@ -9,6 +9,8 @@ import com.smartbear.ready.cmd.runner.pro.SoapUIProTestCaseRunner;
 
 public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
 
+    private int maxErrors = 5;
+
     public ReadyApiExtendedTestCaseRunner() {
         super();
     }
@@ -36,6 +38,6 @@ public class ReadyApiExtendedTestCaseRunner extends SoapUIProTestCaseRunner {
 
     @Override
     protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
-        return new ReadyApiExtendedJUnitReportCollector();
+        return new ReadyApiExtendedJUnitReportCollector(maxErrors);
     }
 }
