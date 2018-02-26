@@ -36,5 +36,7 @@ task copyArtifact {
 	}
 }
 
+copyArtifact.dependsOn build
+
 
 
