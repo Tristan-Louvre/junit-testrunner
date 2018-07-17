@@ -182,6 +182,7 @@ public class ReadyApiExtendedJUnitReportCollector extends JUnitSecurityReportCol
         TestCase testCase = currentStep.getTestCase();
         TestStep dataSource = testRunner.getTestCase().getTestStepAt(0);
 
+
         if (result.getStatus() == TestStepResult.TestStepStatus.FAILED) {
             if (maxErrors > 0) {
                 Integer errors = errorCount.get(testCase);
@@ -226,15 +227,14 @@ public class ReadyApiExtendedJUnitReportCollector extends JUnitSecurityReportCol
 
             buf.append("</pre><hr/>");
 
+            int bufferIndex = 0;
             String propertyHeader = "----------------- Properties ------------------------------";
-            int indexToInsert = buf.indexOf(propertyHeader) + propertyHeader.length()+1;
+            int indexToInsert = buf.lastIndexOf(propertyHeader) + propertyHeader.length()+1;
             int propertyCount = dataSource.getPropertyCount();
-
-            log.warn(dataSource.getName());
 
             for (int i = 0; i < propertyCount; i++) {
                 String propertyKey = dataSource.getPropertyAt(i).getName();
-                String propertyValue = dataSource.getPropertyAt(i).getValue();
+                String propertyValue = runContext.expand(dataSource.getPropertyAt(i).getValue());
                 String propertyConcat = propertyKey + ": " + propertyValue + "\r\n";
                 buf.insert(indexToInsert, propertyConcat);
                 indexToInsert += propertyConcat.length();
